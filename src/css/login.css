@@ -1,0 +1,85 @@
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
+
+.box{
+    height: 560px;
+    width: 600px;
+    margin: 100px auto;
+    background: #f2f2f2;
+    padding: 0 76px;
+    box-sizing: border-box;
+}
+.box h1{
+    height: 148px;
+    line-height: 148px;
+    font-size: 26px;
+    font-weight: bold;
+    padding-left: 214px;
+    background: url(../img/login/u35.png) 60px 48px no-repeat;
+}
+.box .form .form-control{
+    margin-bottom: 10px;
+    height: 50px;
+    padding-left: 50px;
+    background-size: 21px 21px;
+    background-repeat: no-repeat;
+    background-position: 15px 13px;
+}
+.box .form p{
+    width: 274px;
+    position: relative;
+}
+#username{
+    background-image: url(../img/login/u24.png);
+}
+#password{
+    background-image: url(../img/login/u17.png);
+}
+#yzm{
+    background-image: url(../img/login/u8.png);
+}
+
+#code{
+    height: 50px;
+    width: 160px;
+    position: absolute;
+    right: -170px;
+    top: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 38px;
+    line-height: 50px;
+    font-weight: bold;
+    letter-spacing: 7px;
+}
+
+.box .form .custom-checkbox .custom-control-label::after{
+    width: 20px;
+    height: 20px;
+}
+.box .form .custom-checkbox .custom-control-label::before{
+    width: 20px;
+    height: 20px;
+    padding-right: 10px;
+}
+.box .form .custom-checkbox label{
+    font-size: 14px;
+    padding-left: 10px;
+    line-height: 26px;
+}
+.box .form .custom-checkbox{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.box .form .custom-checkbox .forget{
+    float: right;
+    line-height: 26px;
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.box .form .btn{
+    height: 50px;
+}
