@@ -1,0 +1,33 @@
+.core .common_inp{
+    margin: 20px 0;
+}
+.core .common_inp label{
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    text-align: right;
+    line-height: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+    color: #000;
+    vertical-align: top;
+}
+.core .common_inp input{
+    height: 30px;
+    width: 500px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+}
+.core .common_inp select{
+    height: 30px;
+    width: 100px;
+}
+
+#makesure{
+    width: 100px;
+    height: 50px;
+    color: #fff;
+    background: #58bc58;
+    font-size: 18px;
+    border-radius: 4px;
+}

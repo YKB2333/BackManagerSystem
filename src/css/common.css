@@ -83,11 +83,11 @@ html,body{
 .main .top_path a:hover{
     color: #58bc58;
 }
+
 .main .main_bottom .box{
     background-color: #f1f1f1;
     position: relative;
     width: 100%;
-    /* overflow: auto; */
     overflow: hidden;
     padding: 22px;
     box-sizing: border-box;
@@ -115,6 +115,9 @@ html,body{
     background-color: #fff;
     width: 100%;
     float: left;
+    min-height: 480px;
+    height: auto !important;
+    height: 480px;
 }
 /* .main .main_bottom .box .core img{
     width: 100%;

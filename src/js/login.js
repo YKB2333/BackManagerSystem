@@ -15,7 +15,7 @@ $(()=>{
         let password = $.trim($('#password').val());
         console.log($('#mdl').prop('checked'));
         if(username && password){
-            if($.trim($('#yzm').val()) == $.trim($('#code').val())){
+            if($.trim($('#yzm').val()).toLowerCase() == $.trim($('#code').val()).toLowerCase()){
                 $.ajax({
                     type : 'POST',
                     url : '/login',

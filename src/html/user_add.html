@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/user_add.css">
+    <script src="../lib/jquery-1.10.1.min.js"></script>
+    <script src="../js/common.js"></script>
+</head>
+<body>
+    <div id="ManagerSystem">
+        <div class="left_menu">
+            <ul>后台管理系统</ul>
+            <dl>
+                <dt>商品管理</dt>
+                <dd>
+                    <em><a href="">商品列表</a></em>
+                    <em><a href="">商品分类</a></em>
+                    <em><a href="">添加商品</a></em>
+                </dd>
+            </dl>
+            <dl>
+                <dt>用户管理</dt>
+                <dd>
+                    <em><a href="">用户列表</a></em>
+                    <em><a href="">添加用户</a></em>
+                </dd>
+            </dl>
+            <dl>
+                <dt>订单管理</dt>
+                <dd>
+                    <em><a href="">订单列表</a></em>
+                </dd>
+            </dl>
+        </div>
+        <div class="main">
+            <div class="top_path">
+                <a href="">首页</a>
+                /
+                <a href="">商品管理</a>
+                /
+                <a href="">商品分类</a>
+            </div>
+            <div id="content" class="main_bottom">
+                <div class="box">
+                    <img src="../img/center/u70.png" class="u70_img1 u70" alt="">
+                    <img src="../img/center/u70.png" class="u70_img2 u70" alt="">
+                    <img src="../img/center/u70.png" class="u70_img3 u70" alt="">
+                    <img src="../img/center/u70.png" class="u70_img4 u70" alt="">
+                    <div class="core"  id="core_content">
+                        <p class="common_inp">
+                            <label for="username">用户名</label>
+                            <input type="text" id="username" placeholder="请输入用户名">
+                            <span id="username_mes">12345</span>
+                        </p>
+                        <p class="common_inp">
+                            <label for="nike">昵称</label>
+                            <input type="text" id="nike" placeholder="请输入昵称">
+                            <span id="nike_mes">12345</span>
+                        </p>
+                        <p class="common_inp">
+                            <label for="psd">密码</label>
+                            <input type="text" id="psd" placeholder="6-12位密码">
+                            <span id="psd_mes">12345</span>
+                        </p>
+                        <p class="common_inp">
+                            <label for="phone">手机号</label>
+                            <input type="text" id="phone" placeholder="请输入手机号">
+                            <span id="phone_mes">12345</span>
+                        </p>
+                        <p class="common_inp">
+                            <label for="gender">性别</label>
+                            <select id="gender">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                                <option value="不详">不详</option>
+                            </select>
+                            <label for="birthdate">生日</label>
+                            <input type="date" id="birthdate" style="width: 200px;">
+                        </p>
+                        <p class="common_inp">
+                            <label for="email">邮箱</label>
+                            <input type="text" id="email" placeholder="请输入邮箱">
+                            <span id="email_mes">12345</span>
+                        </p>
+                        <p class="common_inp">
+                            <label>备注</label>
+                            <textarea id="beizhu" style="width: 500px;height: 150px;padding: 10px;"></textarea>
+                        </p>
+                        <p class="common_inp">
+                            <label></label>
+                            <input type="button" id="makesure" value="确认">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
