@@ -1,0 +1,127 @@
+html,body{
+    height: 100%;
+    width: 100%;
+}
+#ManagerSystem{
+    height: 100%;
+    /* background: #ccc; */
+}
+.left_menu{
+    width: 230px;
+    height: 100%;
+    background: #20222a;
+    /* text-align: center; */
+    /* color: #fff; */
+    user-select: none;
+}
+.left_menu ul{
+    font-size: 20px;
+    line-height: 50px;
+    color: #c1c1c1;
+    padding-left: 68px;
+    background: url(../img/center/u80.png) no-repeat 40px 12px;
+    cursor: pointer;
+}
+/* .left_menu dl{
+    padding-left: 50px;
+} */
+.left_menu dl dt{
+    font-size: 18px;
+    line-height: 50px;
+    color: #c1c1c1;
+    padding-left: 50px;
+    background: url(../img/center/三角1_u46.png) no-repeat 156px 17px;
+}
+.left_menu dl dt:hover{
+    color: #fff;
+    background-color: #4e5464;
+    cursor: pointer;
+}
+.left_menu dl dd{
+    line-height: 24px;
+    display: none;
+}
+.left_menu dl dd em a{
+    display: block;
+    color: #c1c1c1;
+    font-size: 14px;
+    line-height: 36px;
+    padding-left: 50px;
+}
+.left_menu dl dd em a:hover{
+    color: #fff;
+    background: #4e5464;
+    padding-left: 45px;
+    border-left: 5px solid #5bb776;
+}
+.main{
+    position: fixed;
+    left: 230px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /* width: 100%; */
+    /* background: pink; */
+}
+.main .top_path{
+    line-height: 50px;
+    border-bottom: 2px solid #f1f1f1;
+    user-select: none;
+    padding-left: 36px;
+    color: #999898;
+    margin-bottom: 40px;
+}
+.main .top_path a{
+    font-size: 12px;
+    color: #999898;
+}
+.main .top_path a:hover{
+    color: #58bc58;
+}
+/* .main .main_bottom{
+    width: 100%;
+} */
+.main .main_bottom .box{
+    /* border: 22px solid #f1f1f1; */
+    background-color: #f1f1f1;
+    /* height: 200px; */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 22px;
+    box-sizing: border-box;
+}
+.main .main_bottom .box .u70{
+    position: absolute;
+}
+.main .main_bottom .box .u70_img1{
+    top: 0;
+    left: 0;
+}
+.main .main_bottom .box .u70_img2{
+    top: 0;
+    right: 0;
+}
+.main .main_bottom .box .u70_img3{
+    bottom: 0;
+    left: 0;
+}
+.main .main_bottom .box .u70_img4{
+    bottom: 0;
+    right: 0;
+}
+.main .main_bottom .box .core{
+    /* position: absolute;
+    top: 22px;
+    left: 22px; */
+    /* border: 22px solid #f1f1f1; */
+    background-color: #fff;
+    /* height: 500px; */
+    width: 100%;
+    /* padding: 22px; */
+    float: left;
+    /* overflow: hidden; */
+}
+/* .main .main_bottom .box .core img{
+    width: 100%;
+} */
