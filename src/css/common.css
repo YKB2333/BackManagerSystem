@@ -83,11 +83,11 @@ html,body{
 .main .top_path a:hover{
     color: #58bc58;
 }
-
 .main .main_bottom .box{
     background-color: #f1f1f1;
     position: relative;
     width: 100%;
+    /* overflow: auto; */
     overflow: hidden;
     padding: 22px;
     box-sizing: border-box;
