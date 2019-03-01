@@ -5,16 +5,11 @@ var router = new Router();
 
 router.get('/',async (ctx,next)=>{
     // ctx.body = 'denglu';
-    // let {username,password} = ctx.request.body;
+    let {username,password} = ctx.request.body;
 
-    let res = await db.find('user');
+    let res = await db.insert('user',ctx.request.body);
     
-    res.map(function (item) {
-        let date = new Date(parseInt(item.time));
-        return item.time = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
-    });
-    // let arr = JSON.parse(str);
-    // console.log(res)
+    
     if(res){
         ctx.body = {
             
