@@ -196,7 +196,7 @@ var checkReg = {
     },
     //不用字母开头
     psd2: function (str) {
-        var reg = /^\w{6,16}$/;
+        var reg = /^\w{6,12}$/;
         return reg.test(str);
     },
     confirm_pwd: function (str1, str2) {
