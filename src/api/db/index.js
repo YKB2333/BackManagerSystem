@@ -51,7 +51,8 @@ exports.update = async (colName,query,newData)=>{
     let {db,client} = await connect();
 
     let collection = db.collection(colName);
-    let res = await collection['updateMany'](query,newData);
+    let res = await collection['updateMany'](query,{$set : newData});
+    // db.user.updateMany( { age: { $gt : 18 } } , { $set : { description : "成年"} } );
 
     client.close();
 
