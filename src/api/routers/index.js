@@ -8,6 +8,7 @@ var router = new Router();
 // 引入页面路由
 const loginRouter = require('./login');
 const goodslistRouter = require('./goodslist');
+const userlistRouter = require('./userlist');
 router.use(koaBody({
     // 支持formdata
     multipart:true,
@@ -29,5 +30,6 @@ router.use(koaBody({
 
 router.use('/login',loginRouter.routes());
 router.use('/goodslist',goodslistRouter.routes());
+router.use('/userlist',userlistRouter.routes());
 
 module.exports = router;
