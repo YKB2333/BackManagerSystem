@@ -11,7 +11,7 @@
     <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../lib/mycool.js"></script>
     <script src="../js/common.js"></script>
-    <script src="../js/addUser.js"></script>
+    <script src="../js/editUser.js"></script>
 </head>
 <body>
     <div id="ManagerSystem">
@@ -45,7 +45,7 @@
                 /
                 <a href="javascript:;">用户管理</a>
                 /
-                <a href="">添加用户</a>
+                <a href="">编辑用户</a>
             </div>
             <div id="content" class="main_bottom">
                 <div class="box">
@@ -56,8 +56,8 @@
                     <div class="core"  id="core_content">
                         <p class="common_inp">
                             <label for="username">用户名</label>
-                            <input type="text" id="username" placeholder="请输入用户名">
-                            <span id="username_mes"></span>
+                            <input disabled type="text" id="username" placeholder="请输入用户名">
+                            <span id="username_mes">用户名不可修改</span>
                         </p>
                         <p class="common_inp">
                             <label for="nike">昵称</label>
