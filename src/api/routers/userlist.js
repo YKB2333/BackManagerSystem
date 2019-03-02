@@ -6,24 +6,25 @@ var router = new Router();
 //获取商品所有数据
 router.get('/renderAll',async (ctx,next)=>{
     // ctx.body = 'denglu';
-    // let {username,password} = ctx.request.body;
-    console.log(ctx.request.body);
-    let res = await db.find('user');
-    
-    res.map(function (item) {
+    // console.log(ctx.request.query);
+    let {page,limit} = ctx.request.query;
+    let res = await db.find('user',{});
+
+    let res2 = await db.find('user',{},page,parseInt(limit));
+    res2.map(function (item) {
         let date = new Date(parseInt(item.time));
         return item.time = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
     });
     // let arr = JSON.parse(str);
-    // console.log(res)
-    if(res){
+    // console.log(res2);
+    
+    if(res2){
 
         ctx.body = {
-            
             code:0,
             msg:"",
-            count:1000,
-            data:res
+            count:res.length,
+            data:res2
         }
     }else{
         ctx.body = {
@@ -44,7 +45,13 @@ router.post('/renderOne',async (ctx,next)=>{
 
 //删除商品
 router.post('/delete',async (ctx,next)=>{
-    console.log(ctx.request.body); 
+    // console.log(ctx.request.body); 
+    let {username} = ctx.request.body;
+    for(let i=0;i<username.length;i++){
+        // console.log(username[i]);
+        await db.delete('user',{"username":username[i]});
+    }
+    ctx.body = {code:200};
 });
 
 module.exports = router;

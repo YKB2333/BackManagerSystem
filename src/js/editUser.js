@@ -21,7 +21,8 @@ $(function () {
             $('#phone').val(res[0].phone);
             $('#gender').val(res[0].gender);
             $('#email').val(res[0].email);
-            // isok2 = true;
+            $('#psd').val(res[0].password);
+            isok2 = true;
             isok3 = true;
             isok4 = true;
             isok5 = true;
@@ -124,6 +125,8 @@ $(function () {
                     }
                 }
             });
+        }else{
+            alert('请按要求填写信息哦');
         }
     })
 })

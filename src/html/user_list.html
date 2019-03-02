@@ -113,12 +113,11 @@
       //执行一个 table 实例
       table.render({
         elem: '#demo'
-        , height: 520
+        , height: 525
         , url: '/userlist/renderAll' //数据接口
         , title: '用户表'
         , page: true //开启分页
         , limit: 10
-        , limits: 10
         , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
         , totalRow: false //开启合计行
         , cols: [[ //表头
@@ -139,6 +138,21 @@
       function edit(username) {
         console.log(username);
         location.href = '../html/user_edit.html?username=' + username;
+      }
+
+      //删除用户
+      function Delete(arr1) {
+        $.ajax({
+          type:'POST',
+          url:'/userlist/delete',
+          data:{"username":arr1},
+          success: function(res){
+            // console.log(res);
+            if(res.code == 200){
+              location.reload();
+            }
+          }
+        })
       }
 
       //监听头工具栏事件
@@ -165,6 +179,12 @@
               layer.msg('请选择一行');
             } else {
               layer.msg('删除');
+              let arr = checkStatus.data.map(function(item){
+                return item.username;
+              });
+              // console.log(arr);
+              Delete(arr);
+
             }
             break;
         };
@@ -181,6 +201,19 @@
             obj.del(); //删除对应行（tr）的DOM结构
             layer.close(index);
             //向服务端发送删除指令
+            var arr = [];
+            arr.push(data.username);
+            $.ajax({
+              type:'POST',
+              url:'/userlist/delete',
+              data:{"username":arr},
+              success: function(res){
+                // console.log(res);
+                // if(res.code == 200){
+                //   // location.reload();
+                // }
+              }
+            });
           });
         } else if (layEvent === 'edit') {
           // layer.msg('编辑操作');
@@ -191,7 +224,7 @@
       //分页
       laypage.render({
         elem: 'pageDemo' //分页容器的id
-        , count: 2 //总页数
+        , count: 5 //总页数
         , skin: '#1E9FFF' //自定义选中色值
         //,skip: true //开启跳页
         , jump: function (obj, first) {
