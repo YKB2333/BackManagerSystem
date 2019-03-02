@@ -3,12 +3,14 @@ const db = require('../db');
 // 创建路由
 var router = new Router();
 // var ObjectId = require('mongodb').ObjectId;//引入mongodb的_id方法
+
+//渲染分类列表
 router.get('/',async (ctx,next)=>{
     // ctx.body = 'denglu';
-    let {page,limit} = ctx.request.query;
+    // let {username,password} = ctx.request.body;
 
-    let res = await db.find('goodslist',{},page,parseInt(limit));
-    let res2 = await db.find('goodslist');
+    let res = await db.find('category');
+
     res.map(function (item) {
         // item._id = item._id.toString().split('"')[0];
         item.adding_time = setTimes(item.adding_time * 1);
@@ -23,7 +25,7 @@ router.get('/',async (ctx,next)=>{
             
             code:0,
             msg:"",
-            count:res2.length,
+            count:1000,
             data:res
         }
     // }else{
@@ -53,52 +55,32 @@ function setTimes(timer) {
 	var min = setDb(time.getMinutes());//分
 	var sec = setDb(time.getSeconds());//秒
 
-    return year +'/' + mon + '/' + day +'/'+hour+':'+min+':'+sec
+    return year +'/' + mon + '/' + day
 }
-let ObjectId = require('mongodb').ObjectId;
-//删除
-router.post('/delete',async (ctx,next)=>{
-    let {_id_arr} = ctx.request.body;
-    console.log({_id_arr});
-    for(i = 0;i < _id_arr.length;i++){
-        _id = {_id: ObjectId(_id_arr[i])};
-        console.log(_id)
-        await db.delete('goodslist',_id);
-    }
+
+//添加分类
+router.post('/addCategory',async (ctx,next)=>{
+    // ctx.body = 'denglu';
+    let {category_name,remarks,adding_time} = ctx.request.body;
+
+    // let res = await db.find('goodslist');
+    let res = await db.insert('category',{category_name,remarks,adding_time});
+    // res.map(function (item) {
+    //     // item._id = item._id.toString().split('"')[0];
+    //     item.adding_time = setTimes(item.adding_time * 1);
+    //     return item;
     
     
-        ctx.body = {
-            
-            code:0,
-            msg:"删除成功",
-            // count:1000,
-            // data:res
-        }
+    // });
+    // let arr = JSON.parse(str);
     
-});
-//修改上架
-router.post('/state',async (ctx,next)=>{
-    let {_id,state} = ctx.request.body;
-    // let {state} = ctx.request.body;
-    // console.log(ctx.request.body);
-    // console.log({_id,state})
-    // _id = {_id: ObjectId(_id)};
-    // {"_id":ObjectId(_id),"state":state};
-    if(state == '下架'){
-        state = '上架';
-    }else if (state == '上架') {
-        state = '下架'
-    }
-    
-    console.log({_id:ObjectId(_id),state:state})
-    let res = await db.update('goodslist',{_id:ObjectId(_id)},{'state':state});
     if(res){
         ctx.body = {
             
             code:0,
             msg:"",
-            
-            data:state
+            count:1000,
+            data:res
         }
     }else{
         ctx.body = {
@@ -106,4 +88,34 @@ router.post('/state',async (ctx,next)=>{
             msg:'fail'
         }
     }
+    console.log(ctx.body);
 });
+
+//修改分类
+//查找指定分类
+var ObjectId = require('mongodb').ObjectId;//引入mongodb的_id方法
+router.post('/find',async (ctx,next)=>{
+    // ctx.body = 'denglu';
+    let {_id} = ctx.request.body;
+    // console.log(ctx.request.body)
+    _id = {_id: ObjectId(_id)};
+    let res = await db.find('category',_id);
+    console.log(res)
+    
+    if(res){
+        ctx.body = {
+            
+            code:1,
+            msg:"",
+            count:1000,
+            data:res
+        }
+    }else{
+        ctx.body = {
+            code:0,
+            msg:'fail'
+        }
+    }
+    // console.log(ctx.body);
+});
+module.exports = router;

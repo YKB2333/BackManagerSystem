@@ -92,7 +92,7 @@ window.onload = function (){
             //     "state": state,
             //     "description":_description
             // }
-            var data = "goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description;
+            var data = "goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description+"&adding_time="+Date.now();
             console.log(data);
             //发起ajax请求
             let xhr = new XMLHttpRequest();
