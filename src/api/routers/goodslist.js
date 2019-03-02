@@ -10,7 +10,7 @@ router.get('/',async (ctx,next)=>{
     let res = await db.find('goodslist');
 
     res.map(function (item) {
-        item._id = item._id.toString().split('"')[0];
+        // item._id = item._id.toString().split('"')[0];
         item.adding_time = setTimes(item.adding_time * 1);
         return item;
     

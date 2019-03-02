@@ -3,9 +3,10 @@ window.onload = function (){
     layui.use(['layer', 'form'], function(){
         var layer = layui.layer
         ,form = layui.form;
-        
+        // var isok = false;
         // layer.msg('Hello World');
         var goods_name = document.getElementById('goods_name');//商品名
+        console.log(goods_name);
         var sub_heading = document.getElementById('sub_heading');//副标题
         var old_price = document.getElementById('old_price');//原价
         var now_price = document.getElementById('now_price');//售价
@@ -59,8 +60,11 @@ window.onload = function (){
        
 
         var btn = document.getElementById('btn');
-        btn.onclick = function () {
+        btn.onclick = function (e) {
+            var e = e || e.event;
+            e.preventDefault();
             var _goods_name = goods_name.value;
+            console.log(_goods_name)
             var _sub_heading = sub_heading.value;
             var _old_price = old_price.value;
             var _now_price = now_price.value;
@@ -96,10 +100,25 @@ window.onload = function (){
             xhr.open('post','/addGoods',true);
             xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-            let data2 = JSON.stringify(data);
-            console.log(data2);
-            xhr.send(data2);
+            // let data2 = JSON.stringify(data);
+            console.log(data);
+            xhr.send(data);
+            xhr.onload = () =>{
+                if(xhr.status == 200){
+                    let res = JSON.parse(xhr.responseText);
+                    if(res.data.ok == 1){
+                        // location.href = 'login.html';
+                        isok = true;
+                        alert('商品添加成功')
+                    }
+                }
+            }
             
         }
+        // if(isok == true){
+        //     layer.msg('商品添加成功');
+        //     isok = false;
+        // }
+        
     });
 }
