@@ -136,7 +136,7 @@
               layer.msg('只能同时编辑一个');
             } else {
               layer.alert('编辑 [ID]：'+ checkStatus.data[0]._id);
-              // window.location.href = 'editGoods.html';
+              window.location.href = 'editGoods.html?id='+checkStatus.data[0]._id;
             }
           break;
           case 'delete':
@@ -144,7 +144,16 @@
               layer.msg('请选择一行');
             } else {
               layer.msg('删除');
-            }
+              //发起ajax请求
+              let xhr = new XMLHttpRequest();
+              
+              xhr.open('post','/goodslist/delete',true);
+              xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+              let data2 = "_id=" + data._id;
+              console.log(data2);
+              xhr.send(data2);
+              }
           break;
         };
       });
@@ -155,25 +164,27 @@
         ,layEvent = obj.event; //获得 lay-event 对应的值
         if(layEvent === 'state'){
           layer.msg('上架');
+
           //发起ajax请求
-          // console.log(obj.data);
-          // var data3 = '';
           var data3 = '_id='+data._id+'&state='+data.state;
-          // if(data.state == '上架'){
-          //   data3 = '_id1='+data._id+'&state1=上架';
-          //   data4 = '_id2='+data._id+'&state2=下架';
-          // }else if (data.state == '下架') {
-          //   data3 = '_id1='+data._id+'&state1=下架';
-          //   data4 = '_id2='+data._id+'&state2=上架';
-          // }
           let xhr = new XMLHttpRequest();
-            
           xhr.open('post','/goodslist/state',true);
           xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
+          xhr.onload = () =>{
+            if(xhr.status == 200){
+                let res = JSON.parse(xhr.responseText);
+                if(res.code == 0){
+                  //  var state_text = document.getElementsByClassName('state');
+                  //  console.log(state_text);
+                  //  state_text = res.data;
+                }
+            }
+          }
           // let data2 = "_id=" + data._id;
           console.log(data3);
           xhr.send(data3);
+          
+
         } else if(layEvent === 'del'){
           layer.confirm('真的删除行么', function(index){
             obj.del(); //删除对应行（tr）的DOM结构
@@ -195,8 +206,8 @@
           });
         } else if(layEvent === 'edit'){
           layer.msg('编辑操作');
-          window.location.href = 'editGoods.html';
-
+          window.location.href = 'editGoods.html?id='+data._id;
+            
         }
       });
       
@@ -236,70 +247,7 @@
     //   .removeClass('layui-hide');
     });
 </script>
-<!-- <script>
-    layui.use('table', function(){
-    var table = layui.table;
- 
 
-    //场景一：下述方法中的键值即为基础参数项
-    table.render({
-        elem: '#demo', //指定原始表格元素选择器（推荐id选择器）
-        height: 300,
-        url: '/goodslist',
-        page:true,
-        // initSort:'id',
-        cols:  [[ //标题栏
-        {checkbox: true}
-        // ,{field: 'id', title: 'ID', width: 80}
-        // ,{field: 'goodsname', title: '商品名称', width: 120}
-        // ,{field: 'goodsname', title: '分类', width: 120}
-        // ,{field: 'old_price', title: '价格（原价）', width: 80}
-        // ,{field: 'now_price', title: '价格（现价）', width: 80}
-        // ,{field: 'number', title: '库存', width: 60}
-        // ,{field: 'state', title: '状态', width: 80}
-        // ,{field: 'Adding_time', title: '添加时间', width: 80}
-        // // ,{field: 'operation', title: '操作', width: 120}
-        // ,{fixed: 'operation', width:150, align:'center', toolbar: '#barDemo'}
-        ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-            ,{field: 'username', title: '用户名', width:80}
-            ,{field: 'sex', title: '性别', width:80, sort: true}
-            ,{field: 'city', title: '城市', width:80} 
-            ,{field: 'sign', title: '签名', width: 177}
-            ,{field: 'experience', title: '积分', width: 80, sort: true}
-            ,{field: 'score', title: '评分', width: 80, sort: true}
-            ,{field: 'classify', title: '职业', width: 80}
-            ,{field: 'wealth', title: '财富', width: 135, sort: true}
-            // ,{fixed: 'operation', width:150, align:'center', toolbar: '#barDemo'}
-        ]]
-    });
-
-
-        //监听工具条
-    // table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-    // var data = obj.data; //获得当前行数据
-    // var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-    // var tr = obj.tr; //获得当前行 tr 的DOM对象
-    
-    // if(layEvent === 'detail'){ //查看
-    //     //do somehing
-    // } else if(layEvent === 'del'){ //删除
-    //     layer.confirm('真的删除行么', function(index){
-    //     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-    //     layer.close(index);
-    //     //向服务端发送删除指令
-    //     });
-    // } else if(layEvent === 'edit'){ //编辑
-    //     //do something
-        
-    //     //同步更新缓存对应的值
-    //     obj.update({
-    //     username: '123'
-    //     ,title: 'xxx'
-    //     });
-    // }
-    // });
-})
-</script> -->
 
     
 </html>

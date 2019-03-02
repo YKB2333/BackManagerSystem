@@ -11,6 +11,25 @@ html,body{
     /* background: #ccc; */
     overflow-y: scroll;
 }
+.main .top_path .login{
+    margin-right: 30px;
+    font-size: 14px;
+    color: #ff6900;
+    /* text-shadow: 0 0 3px purple; */
+}
+.main .top_path .login:hover{
+    text-decoration: underline;
+}
+.main .top_path .login a{
+    font-size: 14px;
+    color: #ff6900;
+    display: inline-block;
+    margin-left: 5px;
+}
+.main .top_path .login a:hover{
+    text-decoration: underline;
+    color: #58bc58;
+}
 .left_menu{
     width: 230px;
     height: 100%;

@@ -99,8 +99,8 @@ router.post('/state',async (ctx,next)=>{
             
             code:0,
             msg:"",
-            count:1000,
-            data:res
+            
+            data:state
         }
     }else{
         ctx.body = {

@@ -1,24 +1,4 @@
-/* .core ul li{
-    line-height: 54px;
-    margin-top: 1px;
-}
-.core ul li label{
-    display: inline-block;
-    width: 110px;
-    text-align: right;
-    margin-right: 22px;
-    font-size: 16px;
-    color: #333333;
-    font-family: '微软雅黑';
-}
-.core ul li .input1{
-    width: 518px;
-    height: 38px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding-left: 5px;
-    font-size: 12px;
-} */
+
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #999999;
 }
@@ -37,35 +17,18 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
     box-sizing: border-box;
     border: 1px solid #ccc;
 }
-/* .core ul li .layui-input-block{
-    width: 518px;
-    height: 38px;
-    margin-left: 5px;
+.goodsimg li img{
+    width: 100px;
 }
-.core ul li .layui-input-block select{
-    width: 518px;
-    height: 38px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding-left: 5px;
-    font-size: 12px;
-}
-.core ul li .layui-input-block option{
-    font-size: 12px;
-    font-family: '微软雅黑';
-    line-height: 38px;
-} */
 .layui-form{
     width: 100%;
-    /* display: none; */
-    /* overflow: hidden; */
-    /* height: 100px; */
+
 }
-.layui-form-item{
-    /* line-height: 54px; */
-    /* margin-top: 1px; */
-    /* margin-bottom: 0; */
-}
+/* .layui-form-item{
+    line-height: 54px;
+    margin-top: 1px;
+    margin-bottom: 0;
+} */
 .layui-form-item label{
     /* display: inline-block;
     width: 110px;
@@ -76,10 +39,47 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
     font-family: '微软雅黑';
 }
 .layui-form-item .input1{
+    display: inline-block;
     width: 518px;
     height: 38px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     padding-left: 5px;
     font-size: 12px;
+}
+.layui-form-item ul li{
+    width: 100px;
+    /* text-align: center; */
+    margin-left: 74px;
+    position: relative;
+}
+.layui-form-radio>i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+.layui-form-item ul li #u749{
+    position: absolute;
+    left: 27px;
+    top: 5px;
+    width: 96px;
+    /* font-size: 60px; */
+    word-wrap: break-word;
+}
+.layui-form-item ul li #u749 span{
+    display: inline-block;
+    font-size: 60px;
+    color: #999999;
+    font-weight: 800;
+}
+.layui-form-item .layui-input-inline {
+    float: left;
+    width: 230px;
+    margin-right: 10px;
+    line-height: 38px;
+}
+.layui-form-item .layui-input-inline {
+    float: left;
+    width: 286px;
+    margin-right: 10px;
+    line-height: 38px;
 }
