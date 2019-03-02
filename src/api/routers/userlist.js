@@ -42,4 +42,9 @@ router.post('/renderOne',async (ctx,next)=>{
     ctx.body = res;
 });
 
+//删除商品
+router.post('/delete',async (ctx,next)=>{
+    console.log(ctx.request.body); 
+});
+
 module.exports = router;
