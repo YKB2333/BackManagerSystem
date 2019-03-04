@@ -49,7 +49,8 @@ $(function () {
                     "like[Recommend]":isture2,
                     "like[Promotion]":isture3,
                     "state":startData.state,
-                    "description":startData.description
+                    "description":startData.description,
+                    "adding_time":Date.now()
                 });
                 // form.on('submit(button)', function(data){
                 //     // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象

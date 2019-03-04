@@ -19,7 +19,7 @@
             <dt>商品管理</dt>
             <dd>
                 <em><a href="../html/goodslist.html">商品列表</a></em>
-                <em><a href="../html/category.html">商品分类</a></em>
+                <em><a href="../html/goods_category.html">商品分类</a></em>
                 <em><a href="../html/addGoods.html">添加商品</a></em>
             </dd>
         </dl>
@@ -68,6 +68,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     <!-- <div class="state" id="state">上架</div> -->
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="state" class="state">上架</a>
+   
 
 </script>
    
@@ -149,12 +150,26 @@
               let xhr = new XMLHttpRequest();
               
               xhr.open('post','/goodslist/delete',true);
-              xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-              let data2 = "_id=" + data._id;
-              console.log(data2);
-              xhr.send(data2);
+              xhr.setRequestHeader('Content-Type','application/json');
+              console.log(data)
+              var arr3 = [];
+              for(i = 0;i < data.length;i++){
+                arr3.push(data[i]._id);
               }
+              console.log(arr3)
+              let data2 = {"_id_arr":arr3};
+              var data5 = JSON.stringify(data2)
+              console.log(data2);
+              xhr.send(data5);
+              xhr.onload = () =>{
+                if(xhr.status == 200){
+                    let res = JSON.parse(xhr.responseText);
+                    if(res.code == 0){
+                      location.reload();
+                    }
+                }
+              }
+            }
           break;
         };
       });
