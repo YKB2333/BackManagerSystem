@@ -19,7 +19,7 @@ const editGoodsRouter = require('./editGoods');
 const categoryRouter = require('./category');
 
 
-const orderRouter = require('./order');
+// const orderRouter = require('./order');
 
 
 router.use(koaBody({
@@ -53,7 +53,7 @@ router.use('/useradd', useraddRouter.routes());
 router.use('/useredit', usereditRouter.routes());
 router.use('/addGoods', addGoodsRouter.routes());
 router.use('/editGoods', editGoodsRouter.routes());
-router.use('/order', orderRouter.routes());
+// router.use('/order', orderRouter.routes());
 
 
 

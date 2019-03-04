@@ -18,7 +18,7 @@
           <dl>
             <dt>商品管理</dt>
             <dd>
-                <em><a href="../html/goodslist.html">商品列表</a></em>
+                <em><a href="javascript:;">商品列表</a></em>
                 <em><a href="../html/goods_category.html">商品分类</a></em>
                 <em><a href="../html/addGoods.html">添加商品</a></em>
             </dd>
@@ -39,11 +39,11 @@
         </div>
         <div class="main">
             <div class="top_path">
-                <a href="">首页</a>
-                <!-- /
-                <a href="">商品管理</a>
+                <a href="../html/center.html">首页</a>
                 /
-                <a href="">商品分类</a> -->
+                <a href="javascript:;">商品管理</a>
+                /
+                <a href="javascript:;">商品列表</a>
             </div>
             <div id="content" class="main_bottom">
                 <div class="box">
@@ -128,7 +128,7 @@
         switch(obj.event){
           case 'add':
             // layer.msg('添加');
-            window.location.href = 'addGoods.html';
+            window.location.href = '../html/addGoods.html';
           break;
           case 'update':
             if(data.length === 0){
@@ -137,7 +137,7 @@
               layer.msg('只能同时编辑一个');
             } else {
               layer.alert('编辑 [ID]：'+ checkStatus.data[0]._id);
-              window.location.href = 'editGoods.html?id='+checkStatus.data[0]._id;
+              window.location.href = '../html/editGoods.html?id='+data[0]._id;
               // window.location.href = 'editGoods.html?id='+data._id;
             }
           break;
@@ -149,7 +149,7 @@
               //发起ajax请求
               let xhr = new XMLHttpRequest();
               
-              xhr.open('post','/goodslist/delete',true);
+              xhr.open('post','/goodslist/deleteMany',true);
               xhr.setRequestHeader('Content-Type','application/json');
               console.log(data)
               var arr3 = [];
@@ -211,18 +211,27 @@
 
             //发起ajax请求
             let xhr = new XMLHttpRequest();
-            
-            xhr.open('post','/goodslist/delete',true);
+              
+            xhr.open('post','/goodslist/deleteSingle',true);
             xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            console.log(data)
 
-            let data2 = "_id=" + data._id;
-            console.log(data2);
-            xhr.send(data2);
+            var data5 = '_id='+data._id;
+
+            xhr.send(data5);
+            xhr.onload = () =>{
+              if(xhr.status == 200){
+                  let res = JSON.parse(xhr.responseText);
+                  if(res.code == 0){
+                    location.reload();
+                  }
+              }
+            }
 
           });
         } else if(layEvent === 'edit'){
           layer.msg('编辑操作');
-          window.location.href = 'editGoods.html?id='+data._id;
+          window.location.href = '../html/editGoods.html?id='+data._id;
             
         }
       });

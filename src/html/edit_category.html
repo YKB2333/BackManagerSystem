@@ -22,7 +22,7 @@
                 <dt>商品管理</dt>
                 <dd>
                     <em><a href="../html/goodslist.html">商品列表</a></em>
-                    <em><a href="../html/category.html">商品分类</a></em>
+                    <em><a href="../html/goods_category.html">商品分类</a></em>
                     <em><a href="../html/addGoods.html">添加商品</a></em>
                 </dd>
             </dl>
@@ -42,11 +42,11 @@
         </div>
         <div class="main">
             <div class="top_path">
-                <a href="">首页</a>
+                <a href="../html/center.html">首页</a>
                 /
-                <a href="">商品管理</a>
+                <a href="javascript:;">商品管理</a>
                 /
-                <a href="" style="color: #666666">修改分类</a>
+                <a href="javascript:;" style="color: #666666">修改分类</a>
                 <div id="login" class="login fr">用户名<a href="../index.html">退出</a></div>
             </div>
 
@@ -103,9 +103,9 @@
                 url:'/category/find',
                 data:data1,
                 success:function(res){
-                    console.log(res);
+                    // console.log(res);
                     var stertData = res.data[0];
-                    console.log(stertData)
+                    // console.log(stertData)
                     form.val("formTest", {
                         "category_name": stertData.category_name // "name": "value"
                         ,"remarks": stertData.remarks
@@ -115,14 +115,17 @@
                     form.on('submit(button)', function(data){
                         // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
                         // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-                        // console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+                        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
                         // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-                        var data = "category_name="+data.field.category_name+"&remarks="+data.field.remarks+"&adding_time="+Date.now();
+                        var url = document.location.toString();
+                　　　　 var arrUrl = url.split("?")[1];
+                        var data1 = '_id='+arrUrl.split('=')[1]
+                        var data = data1+"&category_name="+data.field.category_name+"&remarks="+data.field.remarks;
                         console.log(data);
                         //发起ajax请求
                         let xhr = new XMLHttpRequest();
                             
-                        xhr.open('post','/category/addCategory',true);
+                        xhr.open('post','/category/update',true);
                         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
             
                         // let data2 = JSON.stringify(data);
@@ -134,7 +137,9 @@
                                 if(res.data.ok == 1){
                                     // location.href = 'login.html';
                                     
-                                    alert('商品添加成功')
+                                    alert('分类修改成功！');
+                                    location.href = '../html/goods_category.html';
+
                                 }
                             }
                         }

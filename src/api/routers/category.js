@@ -8,9 +8,10 @@ var router = new Router();
 router.get('/',async (ctx,next)=>{
     // ctx.body = 'denglu';
     // let {username,password} = ctx.request.body;
-
-    let res = await db.find('category');
-
+    let {page,limit} = ctx.request.query;
+    // console.log({page,limit})
+    let res = await db.find('category',{},page,parseInt(limit));
+    let res2 = await db.find('category');
     res.map(function (item) {
         // item._id = item._id.toString().split('"')[0];
         item.adding_time = setTimes(item.adding_time * 1);
@@ -25,7 +26,7 @@ router.get('/',async (ctx,next)=>{
             
             code:0,
             msg:"",
-            count:1000,
+            count:res2.length,
             data:res
         }
     // }else{
@@ -37,7 +38,7 @@ router.get('/',async (ctx,next)=>{
     // console.log(ctx.body);
 });
 
-module.exports = router;
+// module.exports = router;
 
 function setDb(num){
     if(num >= 10){
@@ -88,9 +89,49 @@ router.post('/addCategory',async (ctx,next)=>{
             msg:'fail'
         }
     }
-    console.log(ctx.body);
+    // console.log(ctx.body);
 });
-
+//删除分类
+router.post('/deleteMany',async (ctx,next)=>{
+    let {_id_arr} = ctx.request.body;
+    console.log({_id_arr});
+    for(i = 0;i < _id_arr.length;i++){
+        _id = {_id: ObjectId(_id_arr[i])};
+        console.log(_id)
+        await db.delete('category',_id);
+    }
+    
+    
+        ctx.body = {
+            
+            code:0,
+            msg:"删除成功",
+            // count:1000,
+            // data:res
+        }
+    
+});
+//单个删除
+router.post('/deleteSingle',async (ctx,next)=>{
+    let {_id} = ctx.request.body;
+    // console.log({_id_arr});
+    // for(i = 0;i < _id_arr.length;i++){
+        _id = {_id: ObjectId(_id)};
+        console.log(_id)
+    let res =   await db.delete('category',_id);
+    // }
+    
+    console.log(res)
+    
+        ctx.body = {
+            
+            code:0,
+            msg:"删除成功",
+            // count:1000,
+            data:res
+        }
+    
+});
 //修改分类
 //查找指定分类
 var ObjectId = require('mongodb').ObjectId;//引入mongodb的_id方法
@@ -100,7 +141,7 @@ router.post('/find',async (ctx,next)=>{
     // console.log(ctx.request.body)
     _id = {_id: ObjectId(_id)};
     let res = await db.find('category',_id);
-    console.log(res)
+    // console.log(res)
     
     if(res){
         ctx.body = {
@@ -116,6 +157,40 @@ router.post('/find',async (ctx,next)=>{
             msg:'fail'
         }
     }
+    // console.log(ctx.body);
+});
+//
+router.post('/update',async (ctx,next)=>{
+    // console.log(ctx.request.body,22);
+    // ctx.body = 'denglu';
+    // let {_id} = ctx.request.body;
+    // console.log(_id,11);
+    let {_id,category_name,remarks} = ctx.request.body;
+    // let {_id} = ctx.request.body;
+
+    _id = {_id: ObjectId(_id)};
+    console.log(_id,22);
+    
+    // delete ctx.request.body._id;
+    
+    
+    let res = await db.update('category',_id,{category_name,remarks});
+
+    
+    // if(res){
+        ctx.body = {
+            
+            code:0,
+            msg:"",
+            count:1000,
+            data:res
+        }
+    // }else{
+    //     ctx.body = {
+    //         code:100,
+    //         msg:'fail'
+    //     }
+    // }
     // console.log(ctx.body);
 });
 module.exports = router;

@@ -5,8 +5,40 @@ window.onload = function (){
         ,form = layui.form;
         // var isok = false;
         // layer.msg('Hello World');
+        var select = document.getElementById('select');
+        //发起ajax请求
+        let xhr = new XMLHttpRequest();
+        xhr.open('post','/addGoods/find_category',true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+        let data2 = '';
+        // console.log(data);
+        xhr.send(data2);
+        xhr.onload = () =>{
+            if(xhr.status == 200){
+                let res = JSON.parse(xhr.responseText);
+                console.log(res.data);
+                let getData = res.data;
+                let str = `<option value=""  selected="">请选择</option>`;
+                for(i = 0;i < getData.length;i++){
+                    str += `<option value="${getData[i].category_name}">${getData[i].category_name}</option>`;
+                }
+                select.innerHTML = str;
+                console.log(str)
+                // if(res.data.ok == 1){
+                //     // location.href = 'login.html';
+                //     isok = true;
+                //     alert('商品添加成功')
+                // }
+                form.render('select');
+            }
+        }
+
+
+
+
         var goods_name = document.getElementById('goods_name');//商品名
-        console.log(goods_name);
+        // console.log(goods_name);
         var sub_heading = document.getElementById('sub_heading');//副标题
         var old_price = document.getElementById('old_price');//原价
         var now_price = document.getElementById('now_price');//售价
@@ -108,8 +140,15 @@ window.onload = function (){
                     let res = JSON.parse(xhr.responseText);
                     if(res.data.ok == 1){
                         // location.href = 'login.html';
-                        isok = true;
-                        alert('商品添加成功')
+                        // isok = true;
+                        // alert('商品添加成功')
+                                           
+                        var res2 = confirm('商品添加成功！是否继续添加');
+                        if(res2){
+                            location.reload();
+                        }else {
+                            location.href = '../html/goodslist.html';
+                        }
                     }
                 }
             }

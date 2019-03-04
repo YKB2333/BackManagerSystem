@@ -53,11 +53,11 @@ function setTimes(timer) {
 	var min = setDb(time.getMinutes());//分
 	var sec = setDb(time.getSeconds());//秒
 
-    return year +'/' + mon + '/' + day +'/'+hour+':'+min+':'+sec
+    return year +'/' + mon + '/' + day;
 }
 let ObjectId = require('mongodb').ObjectId;
-//删除
-router.post('/delete',async (ctx,next)=>{
+//多个删除
+router.post('/deleteMany',async (ctx,next)=>{
     let {_id_arr} = ctx.request.body;
     console.log({_id_arr});
     for(i = 0;i < _id_arr.length;i++){
@@ -73,6 +73,27 @@ router.post('/delete',async (ctx,next)=>{
             msg:"删除成功",
             // count:1000,
             // data:res
+        }
+    
+});
+//单个删除
+router.post('/deleteSingle',async (ctx,next)=>{
+    let {_id} = ctx.request.body;
+    // console.log({_id_arr});
+    // for(i = 0;i < _id_arr.length;i++){
+        _id = {_id: ObjectId(_id)};
+        console.log(_id)
+    let res =   await db.delete('goodslist',_id);
+    // }
+    
+    console.log(res)
+    
+        ctx.body = {
+            
+            code:0,
+            msg:"删除成功",
+            // count:1000,
+            data:res
         }
     
 });

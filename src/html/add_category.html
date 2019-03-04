@@ -22,7 +22,7 @@
                 <dt>商品管理</dt>
                 <dd>
                     <em><a href="../html/goodslist.html">商品列表</a></em>
-                    <em><a href="../html/category.html">商品分类</a></em>
+                    <em><a href="../html/goods_category.html">商品分类</a></em>
                     <em><a href="../html/addGoods.html">添加商品</a></em>
                 </dd>
             </dl>
@@ -42,11 +42,11 @@
         </div>
         <div class="main">
             <div class="top_path">
-                <a href="">首页</a>
+                <a href="../html/center.html">首页</a>
                 /
-                <a href="">商品管理</a>
+                <a href="javascript:;">商品管理</a>
                 /
-                <a href="" style="color: #666666">添加分类</a>
+                <a href="javascript:;" style="color: #666666">添加分类</a>
                 <div id="login" class="login fr">用户名<a href="../index.html">退出</a></div>
             </div>
 
@@ -115,7 +115,18 @@
                         if(res.data.ok == 1){
                             // location.href = 'login.html';
                             
-                            alert('商品添加成功')
+                            // alert('商品添加成功')
+                            var res2 = confirm('添加成功！是否继续添加');
+                            if(res2){
+                                var goods_name = document.querySelector('#goods_name');
+                                var description = document.querySelector('#description');
+                                goods_name.value = '';
+                                description.value = '';
+                                // $('#goods_name').val();
+                                // $('#description').val();
+                            }else {
+                                location.href = '../html/goods_category.html';
+                            }
                         }
                     }
                 }
