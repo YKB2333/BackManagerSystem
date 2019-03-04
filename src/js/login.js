@@ -1,9 +1,30 @@
 $(()=>{
 
     //判断免登录否，是则跳到主页
-    if($.cookie('username')){
-        location.href = 'html/center.html';
+    let user = localStorage.getItem('user');
+    // console.log(user);
+    if (!user) {
+        user = {}
+    } else {
+        user = JSON.parse(user);
     }
+    console.log(user);
+
+    if (user.token) {
+        $.ajax({
+            type:'POST',
+            url:'/verify',
+            data:'token='+user.token,
+            success:function(res){
+                console.log(res);
+                if(res.status == 200){
+                    location.href = "html/center.html";
+                }
+            }
+        });
+    }
+
+
     $('#code').val(randomYZM(5));
     $('#code').css('color',randomColor(16));
     $('#code').on('click',()=>{

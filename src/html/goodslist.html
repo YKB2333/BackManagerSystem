@@ -44,6 +44,9 @@
                 <a href="javascript:;">商品管理</a>
                 /
                 <a href="javascript:;">商品列表</a>
+                <div id="login" class="login fr">
+                    <!-- <a href="../index.html">退出</a> -->
+                </div>
             </div>
             <div id="content" class="main_bottom">
                 <div class="box">
@@ -62,6 +65,39 @@
     </div>
     
 </body>
+
+<script>
+  (()=>{
+    //设置了七天免登录
+    let user = localStorage.getItem('user');
+        // console.log(user);
+        if (!user) {
+            user = {}
+        } else {
+            user = JSON.parse(user);
+            $('#login').html('欢迎您  '+user.username+'<a href="javascript:;">退出</a>');
+            $('#login').css('color','purple');
+        }
+        
+        
+        //未设置免登录
+        let user2 = sessionStorage.getItem('username');
+        if(!user2){
+            user2 = '';
+        }else{
+            $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+            $('#login').css('color','purple');
+        }
+
+        //退出
+        $('#login').on('click','a',function(){
+            localStorage.clear();
+            sessionStorage.clear();
+            location.href = '../index.html';
+        });
+  })()
+
+</script>
 <script type="text/html" id="barDemo">
     <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>

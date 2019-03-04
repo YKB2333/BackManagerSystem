@@ -1,4 +1,31 @@
 window.onload = function (){
+    //设置了七天免登录
+    let user = localStorage.getItem('user');
+    // console.log(user);
+    if (!user) {
+        user = {}
+    } else {
+        user = JSON.parse(user);
+        $('#login').html('欢迎您  '+user.username+'<a href="javascript:;">退出</a>');
+        $('#login').css('color','purple');
+    }
+    
+    
+    //未设置免登录
+    let user2 = sessionStorage.getItem('username');
+    if(!user2){
+        user2 = '';
+    }else{
+        $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+        $('#login').css('color','purple');
+    }
+
+    //退出
+    $('#login').on('click','a',function(){
+        localStorage.clear();
+        sessionStorage.clear();
+        location.href = '../index.html';
+    });
     //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function(){
         var layer = layui.layer

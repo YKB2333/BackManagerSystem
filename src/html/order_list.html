@@ -59,6 +59,9 @@
         <a href="javascript:;">订单管理</a>
         /
         <a href="">订单列表</a>
+        <div id="login" class="login fr">
+            <!-- <a href="../index.html">退出</a> -->
+        </div>
       </div>
       <div id="content" class="main_bottom">
         <div class="box">
@@ -90,6 +93,38 @@
       <input type="button" name="" id="btnNo" value="取消" style="width: 50px;height: 25px;background: royalblue;color: #fff;border-radius: 2px;margin: 0 10px;">
     </div>
   </div>
+
+  <script>
+    (()=>{
+      //设置了七天免登录
+      let user = localStorage.getItem('user');
+        // console.log(user);
+        if (!user) {
+            user = {}
+        } else {
+            user = JSON.parse(user);
+            $('#login').html('欢迎您  '+user.username+'<a href="javascript:;">退出</a>');
+            $('#login').css('color','purple');
+        }
+        
+        
+        //未设置免登录
+        let user2 = sessionStorage.getItem('username');
+        if(!user2){
+            user2 = '';
+        }else{
+            $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+            $('#login').css('color','purple');
+        }
+
+        //退出
+        $('#login').on('click','a',function(){
+            localStorage.clear();
+            sessionStorage.clear();
+            location.href = '../index.html';
+        });
+    })()
+  </script>
 
   <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
