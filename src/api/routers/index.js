@@ -12,6 +12,7 @@ const userlistRouter = require('./userlist');
 const useraddRouter = require('./user_add');
 
 
+
 const usereditRouter = require('./user_edit');
 const addGoodsRouter = require('./addGoods');
 const editGoodsRouter = require('./editGoods');
@@ -20,6 +21,7 @@ const categoryRouter = require('./category');
 
 const orderRouter = require('./order');
 const verifyRouter = require('./tokenverify');
+
 
 router.use(koaBody({
     // 支持formdata
@@ -42,7 +44,7 @@ router.use(koaBody({
 
 
 
-router.use('/category',categoryRouter.routes());
+router.use('/category', categoryRouter.routes());
 
 
 router.use('/login', loginRouter.routes());
@@ -52,8 +54,10 @@ router.use('/useradd', useraddRouter.routes());
 router.use('/useredit', usereditRouter.routes());
 router.use('/addGoods', addGoodsRouter.routes());
 router.use('/editGoods', editGoodsRouter.routes());
+
 router.use('/order', orderRouter.routes());
 router.use('/verify', verifyRouter.routes());
+
 
 
 module.exports = router;

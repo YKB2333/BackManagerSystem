@@ -4,7 +4,30 @@ $(function () {
         var layer = layui.layer
         ,form = layui.form;
 
+        // var category = document.getElementById('category');
+        //发起ajax请求
+        let xhr = new XMLHttpRequest();
+        xhr.open('post','/addGoods/find_category',true);
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
+        let data2 = '';
+        // console.log(data);
+        xhr.send(data2);
+        xhr.onload = () =>{
+            if(xhr.status == 200){
+                let res = JSON.parse(xhr.responseText);
+                console.log(res.data);
+                let getData = res.data;
+                let str = `<option value=""  selected="">请选择</option>`;
+                for(i = 0;i < getData.length;i++){
+                    str += `<option value="${getData[i].category_name}">${getData[i].category_name}</option>`;
+                }
+                // console.log(str);
+
+                $('select').html(str);
+                form.render('select');
+            }
+        }
 
         
         
@@ -73,6 +96,7 @@ $(function () {
         
                 //商品分类：电脑、手机
                 form.on('select(filter)', function(data){
+                    
                     // console.log(data.elem); //得到select原始DOM对象
                     console.log(data.value); //得到被选中的值
                     category = data.value;//商品分类：电脑、手机
@@ -134,12 +158,12 @@ $(function () {
                         arr2.push(imgsrc);
                     }
 
-                    var data = "goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description;
+                    var data = data1+"&goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description;
                     console.log(data);
                     //发起ajax请求
                     let xhr = new XMLHttpRequest();
                       
-                    xhr.open('post','/addGoods',true);
+                    xhr.open('post','/editGoods/update',true);
                     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
         
                     // let data2 = JSON.stringify(data);
@@ -151,7 +175,9 @@ $(function () {
                             if(res.data.ok == 1){
                                 // location.href = 'login.html';
                                 
-                                alert('商品添加成功')
+                                alert('商品修改成功');
+                                location.href = '../html/goodslist.html';
+             
                             }
                         }
                     }

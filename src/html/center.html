@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../js/common.js"></script>
 </head>
+
 <body>
     <div id="ManagerSystem">
         <div class="left_menu">
@@ -17,33 +19,47 @@
             <dl>
                 <dt>商品管理</dt>
                 <dd>
-                    <em><a href="../html/goodslist.html">商品列表</a></em>
-                    <em><a href="../html/category.html">商品分类</a></em>
-                    <em><a href="../html/addGoods.html">添加商品</a></em>
+                    <em>
+                        <a href="../html/goodslist.html">商品列表</a>
+                    </em>
+                    <em>
+                        <a href="../html/goods_category.html">商品分类</a>
+                    </em>
+                    <em>
+                        <a href="../html/addGoods.html">添加商品</a>
+                    </em>
                 </dd>
             </dl>
             <dl>
                 <dt>用户管理</dt>
                 <dd>
-                    <em><a href="../html/user_list.html">用户列表</a></em>
-                    <em><a href="../html/user_add.html">添加用户</a></em>
+                    <em>
+                        <a href="../html/user_list.html">用户列表</a>
+                    </em>
+                    <em>
+                        <a href="../html/user_add.html">添加用户</a>
+                    </em>
                 </dd>
             </dl>
             <dl>
                 <dt>订单管理</dt>
                 <dd>
-                    <em><a href="../html/order_list.html">订单列表</a></em>
+                    <em>
+                        <a href="../html/order_list.html">订单列表</a>
+                    </em>
                 </dd>
             </dl>
         </div>
         <div class="main">
             <div class="top_path">
                 <a href="">首页</a>
-                /
-                <!-- <a href="">商品管理</a>
+                <!-- /
+                <a href="">商品管理</a>
                 /
                 <a href="">商品分类</a> -->
-                <div id="login" class="login fr">用户名<a href="../index.html">退出</a></div>
+                <div id="login" class="login fr">用户名
+                    <a href="../index.html">退出</a>
+                </div>
             </div>
             <div id="content" class="main_bottom">
                 <div class="box">
@@ -51,7 +67,7 @@
                     <img src="../img/center/u70.png" class="u70_img2 u70" alt="">
                     <img src="../img/center/u70.png" class="u70_img3 u70" alt="">
                     <img src="../img/center/u70.png" class="u70_img4 u70" alt="">
-                    <div class="core"  id="core_content">
+                    <div class="core" id="core_content">
                         <img src="../img/center/u98.png" style="width: 100%;" alt="">
                     </div>
                 </div>
@@ -62,17 +78,18 @@
     <script>
         let user = localStorage.getItem('user');
         // console.log(user);
-        if(!user){
+        if (!user) {
             user = {}
-        }else{
+        } else {
             user = JSON.parse(user);
         }
         console.log(user);
 
-        if(user.token){
+        if (user.token) {
 
         }
-    
+
     </script>
 </body>
+
 </html>
