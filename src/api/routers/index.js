@@ -10,13 +10,11 @@ const loginRouter = require('./login');
 const goodslistRouter = require('./goodslist');
 const userlistRouter = require('./userlist');
 const useraddRouter = require('./user_add');
-<<<<<<< HEAD
-const addGoodsRouter = require('./addGoods');
-=======
+
 const usereditRouter = require('./user_edit');
 const addGoodsRouter = require('./addGoods');
 const editGoodsRouter = require('./editGoods');
->>>>>>> 889a2ad73040364dd01cf761542cd0148fec3860
+
 router.use(koaBody({
     // 支持formdata
     multipart:true,
@@ -40,13 +38,10 @@ router.use('/login',loginRouter.routes());
 router.use('/goodslist',goodslistRouter.routes());
 router.use('/userlist',userlistRouter.routes());
 router.use('/useradd',useraddRouter.routes());
-<<<<<<< HEAD
-router.use('/addGoods',addGoodsRouter.routes());
 
-=======
 router.use('/useredit',usereditRouter.routes());
 router.use('/addGoods',addGoodsRouter.routes());
 router.use('/editGoods',editGoodsRouter.routes());
->>>>>>> 889a2ad73040364dd01cf761542cd0148fec3860
+
 
 module.exports = router;
