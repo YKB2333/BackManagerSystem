@@ -1,6 +1,8 @@
 html,body{
     height: 100%;
     overflow: hidden;
+    background: url(../img/login/background.jpg) no-repeat;
+    background-size: 100% 100%;
 }
 
 .box{
@@ -10,6 +12,7 @@ html,body{
     background: #f2f2f2;
     padding: 0 76px;
     box-sizing: border-box;
+    box-shadow: 0 0 5px 5px rgb(145, 61, 28);
 }
 .box h1{
     height: 148px;

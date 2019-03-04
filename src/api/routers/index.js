@@ -19,6 +19,7 @@ const categoryRouter = require('./category');
 
 
 const orderRouter = require('./order');
+const verifyRouter = require('./tokenverify');
 
 router.use(koaBody({
     // 支持formdata
@@ -52,6 +53,7 @@ router.use('/useredit', usereditRouter.routes());
 router.use('/addGoods', addGoodsRouter.routes());
 router.use('/editGoods', editGoodsRouter.routes());
 router.use('/order', orderRouter.routes());
+router.use('/verify', verifyRouter.routes());
 
 
 module.exports = router;

@@ -25,7 +25,8 @@ $(()=>{
                         // console.log(str.code);
                         if(str.code == 200){
                             if($('#mdl').prop('checked')){
-                                $.cookie('username',str.username,{expires:7,path:'/'});
+                                // $.cookie('username',str.username,{expires:7,path:'/'});
+                                localStorage.setItem('user',JSON.stringify(str));
                                 location.href = 'html/center.html';
                             }else{
                                 sessionStorage.setItem('username',str.username);

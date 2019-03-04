@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const db = require('../db');
+const token = require('../utils/token');
 // 创建路由
 var router = new Router();
 
@@ -12,11 +13,13 @@ router.post('/',async (ctx,next)=>{
     res = res[0];
 
     if(res){
+        let _token = token.create(username);
         ctx.body = {
             _id:res._id,
             username:res.username,
             gender:res.gender,
             regtime:res.regtime,
+            token:_token,
             code:200
         }
     }else{

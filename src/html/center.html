@@ -57,5 +57,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let user = localStorage.getItem('user');
+        // console.log(user);
+        if(!user){
+            user = {}
+        }else{
+            user = JSON.parse(user);
+        }
+        console.log(user);
+
+        if(user.token){
+            
+        }
+    
+    </script>
 </body>
 </html>

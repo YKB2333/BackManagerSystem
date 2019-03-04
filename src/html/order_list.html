@@ -74,6 +74,23 @@
     </div>
   </div>
 
+  <div id="shade" style="width: 100%;height: 100%;background: rgba(0, 0, 0, .6);position: absolute;top: 0;display: none;">
+    <div class="statusBox" style="width: 500px;height: 250px;margin: 200px auto;text-align:center;background: powderblue;overflow: hidden;">
+      <p style="margin-top: 80px;margin-bottom: 50px;">
+        <label for="status" style="font-size: 18px;vertical-align: middle;font-weight: bold;">修改订单状态:</label>
+        <select id="status" style="font-size: 18px;line-height: 20px;width: 150px;border-radius: 4px">
+          <option value="未付款">未付款</option>
+          <option value="付款成功">付款成功</option>
+          <option value="发货">发货</option>
+          <option value="签收">签收</option>
+          <option value="完成订单">完成订单</option>
+        </select>
+      </p>
+      <input type="button" name="" id="btnYes" value="确认" style="width: 50px;height: 25px;background: royalblue;color: #fff;border-radius: 2px;margin: 0 10px;">
+      <input type="button" name="" id="btnNo" value="取消" style="width: 50px;height: 25px;background: royalblue;color: #fff;border-radius: 2px;margin: 0 10px;">
+    </div>
+  </div>
+
   <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
         <a class="layui-btn layui-btn-xs" lay-event="edit">修改状态</a>
@@ -114,22 +131,22 @@
       table.render({
         elem: '#demo'
         , height: 525
-        , url: '/userlist/renderAll' //数据接口
+        , url: '/order/renderAll' //数据接口
         , title: '用户表'
         , page: true //开启分页
         , limit: 10
         // , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
         , totalRow: false //开启合计行
         , cols: [[ //表头
-          { type: 'checkbox', fixed: 'left' }
-          , { field: '_id', title: 'ID', width: 230, fixed: 'left', totalRowText: '合计：' }
-          , { field: 'username', title: '用户名', width: 100 }
-          , { field: 'nike', title: '昵称', width: 120, totalRow: true }
-          , { field: 'gender', title: '性别', width: 100, }
-          , { field: 'phone', title: '手机号', width: 200, totalRow: true }
-          , { field: 'email', title: '邮箱', width: 200 }
-          , { field: 'time', title: '注册时间', width: 200, sort: true, totalRow: true }
-          , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
+          { field: 'code', title: '订单编号', width: 180, fixed: 'left', sort: true}
+          , { field: 'goods_name', title: '商品名称', width: 140 }
+          , { field: 'num', title: '数量', width: 80, totalRow: true }
+          , { field: 'price', title: '价格（元）', width: 120}
+          , { field: 'freight', title: '运费', width: 80, totalRow: true }
+          , { field: 'totalprice', title: '结算价格', width: 150}
+          , { field: 'status', title: '订单状态', width: 150 }
+          , { field: 'time', title: '注册时间', width: 150, sort: true, totalRow: true }
+          , { fixed: 'right', title: '操作', width: 165, align: 'center', toolbar: '#barDemo' }
         ]]
       });
 
@@ -173,19 +190,44 @@
       table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
           , layEvent = obj.event; //获得 lay-event 对应的值
-        if (layEvent === 'detail') {
-          layer.msg('查看操作');
+        if (layEvent === 'edit') {
+          $('#shade').show();//修改框开启
+          $('#status').val(data.status);//获取订单当前状态显示
+          //点击确认
+          $('#btnYes').on('click',function () {
+              if($('#status').val() == data.status){//如果未修改直接关闭
+                $('#shade').hide();
+              }else{//修改数据库
+                let newStatus = $('#status').val();
+                $.ajax({
+                  type : 'POST',
+                  url : '/order/updateStatus',
+                  data : 'code='+data.code+'&status='+newStatus,
+                  success : function(res){
+                    // console.log(res);
+                    if(res.code == 200){
+                      // $('#shade').hide();
+                      location.reload();
+
+                    }
+                  }
+                });
+              }
+          });
+          //点击取消关闭
+          $('#btnNo').on('click',function(){
+            $('#shade').hide();
+          });
+
         } else if (layEvent === 'del') {
           layer.confirm('真的删除行么', function (index) {
             obj.del(); //删除对应行（tr）的DOM结构
             layer.close(index);
             //向服务端发送删除指令
-            var arr = [];
-            arr.push(data.username);
             $.ajax({
               type:'POST',
-              url:'/userlist/delete',
-              data:{"username":arr},
+              url:'/order/delete',
+              data:"code="+data.code,
               success: function(res){
                 // console.log(res);
                 // if(res.code == 200){
