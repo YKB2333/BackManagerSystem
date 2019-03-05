@@ -103,7 +103,7 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     <!-- <div class="state" id="state">上架</div> -->
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="state" class="state">上架</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="state" class="state" style="color:#fff;background-color:#ff6900">上/下架</a>
    
 
 </script>
@@ -148,12 +148,12 @@
         ,{field: '_id', title: 'ID', width: 120, sort: true, fixed: 'left', align:'center'}
         ,{field: 'goods_name', title: '商品名称', width: 120, align:'center', sort: true}
         ,{field: 'category', title: '分类', width: 80, sort: true, align:'center'}
-        ,{field: 'old_price', title: '原价(/元)', width: 130, sort: true, align:'center'}
-        ,{field: 'now_price', title: '现价(/元)', width: 130, sort: true, align:'center'}
+        ,{field: 'old_price', title: '原价(/元)', width: 120, sort: true, align:'center'}
+        ,{field: 'now_price', title: '现价(/元)', width: 120, sort: true, align:'center'}
         ,{field: 'stock', title: '库存', width: 80, sort: true, align:'center'}
         ,{field: 'state', title: '状态', width: 80, sort: true, align:'center'}
         ,{field: 'adding_time', title: '添加时间', width: 120, sort: true, align:'center'}
-        ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+        ,{fixed: 'right', width: 180, align:'center', toolbar: '#barDemo'}
         ]]
       });
       
@@ -215,10 +215,11 @@
         var data = obj.data //获得当前行数据
         ,layEvent = obj.event; //获得 lay-event 对应的值
         if(layEvent === 'state'){
-          layer.msg('上架');
+          // layer.msg('上架');
 
           //发起ajax请求
           var data3 = '_id='+data._id+'&state='+data.state;
+          console.log(data3)
           let xhr = new XMLHttpRequest();
           xhr.open('post','/goodslist/state',true);
           xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
@@ -229,11 +230,16 @@
                   //  var state_text = document.getElementsByClassName('state');
                   //  console.log(state_text);
                   //  state_text = res.data;
+                  layer.msg(res.data);
+                  setTimeout(() => {
+                    location.reload();
+                  }, 1000);
+                  
                 }
             }
           }
           // let data2 = "_id=" + data._id;
-          console.log(data3);
+          // console.log(data3);
           xhr.send(data3);
           
 

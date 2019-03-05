@@ -107,9 +107,18 @@ html,body{
     position: relative;
     width: 100%;
     /* overflow: auto; */
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 22px;
     box-sizing: border-box;
+}
+/*万能清除浮动*/
+.main .main_bottom .box::after{
+    content: '';
+    width: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
 }
 .main .main_bottom .box .u70{
     position: absolute;

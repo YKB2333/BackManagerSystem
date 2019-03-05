@@ -102,7 +102,7 @@ router.post('/state',async (ctx,next)=>{
     let {_id,state} = ctx.request.body;
     // let {state} = ctx.request.body;
     // console.log(ctx.request.body);
-    // console.log({_id,state})
+    console.log({_id,state})
     // _id = {_id: ObjectId(_id)};
     // {"_id":ObjectId(_id),"state":state};
     if(state == '下架'){
@@ -113,7 +113,8 @@ router.post('/state',async (ctx,next)=>{
     
     console.log({_id:ObjectId(_id),state:state})
     let res = await db.update('goodslist',{_id:ObjectId(_id)},{'state':state});
-    if(res){
+    console.log(res)
+    if(res.result.ok == 1){
         ctx.body = {
             
             code:0,
