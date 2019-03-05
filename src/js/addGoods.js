@@ -60,7 +60,22 @@ window.onload = function (){
                 form.render('select');
             }
         }
-
+        //图片上传
+        // layui.use('upload', function(){
+        //     var upload = layui.upload;
+             
+        //     //执行实例
+        //     var uploadInst = upload.render({
+        //       elem: '#test1' //绑定元素
+        //       ,url: '/upload/' //上传接口
+        //       ,done: function(res){
+        //         //上传完毕回调
+        //       }
+        //       ,error: function(){
+        //         //请求异常回调
+        //       }
+        //     });
+        // });
 
 
 
@@ -130,55 +145,66 @@ window.onload = function (){
             var _stock = stock.value;
             var _description = description.value;
             //商品照片
-            var goodsimg = document.getElementsByClassName('goodsimg')[0];
-            console.log(goodsimg)
-            var imgs = goodsimg.getElementsByTagName('img');
+            var viewImg = document.getElementById('viewImg');
+            // console.log(goodsimg)
+            var imgs = viewImg.getElementsByTagName('img');
             var arr2 = [];
             for(var i = 0;i < imgs.length;i++){
                 var imgsrc = '..'+(imgs[i].src).split('12580')[1];
                 console.log(imgsrc);
                 arr2.push(imgsrc);
             }
-            // var data = {
-            //     "goods_name":_goods_name,
-            //     "sub_heading":_sub_heading,
-            //     "old_price":_old_price,
-            //     "now_price":_now_price,
-            //     "category":category,
-            //     "img":arr2,
-            //     "stock":_stock,
-            //     "attributes":arr1,
-            //     "state": state,
-            //     "description":_description
-            // }
-            var data = "goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description+"&adding_time="+Date.now();
-            console.log(data);
-            //发起ajax请求
-            let xhr = new XMLHttpRequest();
-              
-            xhr.open('post','/addGoods',true);
-            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            if( _goods_name && _now_price && _stock){
+                console.log()
+                if(category == ''){
+                    alert('请选择商品分类！')
+                }else {
+                        // var data = {
+                    //     "goods_name":_goods_name,
+                    //     "sub_heading":_sub_heading,
+                    //     "old_price":_old_price,
+                    //     "now_price":_now_price,
+                    //     "category":category,
+                    //     "img":arr2,
+                    //     "stock":_stock,
+                    //     "attributes":arr1,
+                    //     "state": state,
+                    //     "description":_description
+                    // }
+                    var data = "goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description+"&adding_time="+Date.now();
+                    console.log(data);
+                    //发起ajax请求
+                    let xhr = new XMLHttpRequest();
+                    
+                    xhr.open('post','/addGoods',true);
+                    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-            // let data2 = JSON.stringify(data);
-            console.log(data);
-            xhr.send(data);
-            xhr.onload = () =>{
-                if(xhr.status == 200){
-                    let res = JSON.parse(xhr.responseText);
-                    if(res.data.ok == 1){
-                        // location.href = 'login.html';
-                        // isok = true;
-                        // alert('商品添加成功')
-                                           
-                        var res2 = confirm('商品添加成功！是否继续添加');
-                        if(res2){
-                            location.reload();
-                        }else {
-                            location.href = '../html/goodslist.html';
+                    // let data2 = JSON.stringify(data);
+                    console.log(data);
+                    xhr.send(data);
+                    xhr.onload = () =>{
+                        if(xhr.status == 200){
+                            let res = JSON.parse(xhr.responseText);
+                            if(res.data.ok == 1){
+                                // location.href = 'login.html';
+                                // isok = true;
+                                // alert('商品添加成功')
+                                                
+                                var res2 = confirm('商品添加成功！是否继续添加');
+                                if(res2){
+                                    location.reload();
+                                }else {
+                                    location.href = '../html/goodslist.html';
+                                }
+                            }
                         }
                     }
                 }
+                
+            }else {
+                alert('请继续完善表单！')
             }
+
             
         }
         // if(isok == true){

@@ -49,7 +49,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 }
 .layui-form-item ul li{
     width: 100px;
-    /* text-align: center; */
+    text-align: center;
     margin-left: 74px;
     position: relative;
 }
@@ -79,7 +79,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 }
 .layui-form-item .layui-input-inline {
     float: left;
-    width: 286px;
+    width: 232px;
     margin-right: 10px;
     line-height: 38px;
 }

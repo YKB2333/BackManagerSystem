@@ -111,8 +111,8 @@
                             </div>
                             <div class="layui-form-item" style="margin-top: 30px">
                                 <label class="layui-form-label">商品图片</label>
-                                <ul  class="layui-input-block goodsimg">
-                                    <li class="fl" style="margin-left:0">
+                                <ul  class="layui-input-block goodsimg"   id="viewImg">
+                                    <!-- <li class="fl" style="margin-left:0">
                                         <img src="../img/addGoods/xiaomi2.jpg" alt="">
                                         <input type="radio" name="sex" value="设为封面" title="设为封面" checked="">
                                     </li>
@@ -129,12 +129,13 @@
                                         <div id="u749" class="text" style="visibility: visible;transform-origin: 48px 41px;">
                                             <p><span>+</span></p>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <!-- <div class="layui-input-block">
                                     <input type="radio" name="sex" value="设为封面" title="设为封面" checked="">
                                     <input type="radio" name="sex" value="设为封面" title="设为封面">
                                 </div> -->
+                                <input type="file" multiple="multiple"   name="file" id="doc"  style="width:150px;" onchange="javascript:setImagePreviews();" accept="image/*" />
                             </div>
                             <div class="layui-form-item">
                                 <div class="layui-inline">
@@ -184,5 +185,84 @@
         </div>
     </div>
 </body>
+<script>
+        //下面用于多图片上传预览功能
+        function setImagePreviews(avalue) {
+            //获取选择图片的对象
+            var docObj = document.getElementById("doc");
+            //后期显示图片区域的对象
+            var viewImg = document.getElementById("viewImg");
+            viewImg.innerHTML = "";
+            //得到所有的图片文件
+            var fileList = docObj.files;
+            //循环遍历
+            for (var i = 0; i < fileList.length; i++) {    
+                if (docObj.files && docObj.files[i]) {
+                    //火狐下，直接设img属性
+                   
+                    //imgObjPreview.src = docObj.files[0].getAsDataURL();
+                      // 1 创建文件读取对象 实例化一个读取器
+        　　　　　　    var reader = new FileReader();
 
+        　　　　　　// 0 通过当前的file标签 获取选择的文件信息
+        　　　　　　  console.log(docObj.files[i]);
+                    var imgsrc6 = '../img/addGoods/'+(docObj.files[i]).name;
+                    console.log(imgsrc6)
+                    //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要以下方式
+                    // imgObjPreview.src = imgsrc6;   //获取上传图片文件的物理路径
+
+                     //动态添加html元素        
+                viewImg.innerHTML += '<li class="fl" style="margin-left:74px"><img  id="img' + i + '" src="'+imgsrc6+'" style="width:100px"><input type="radio" name="sex" value="设为封面" title="设为封面" checked style="display: inline-block">设为封面</li>';
+                     //获取图片imgi的对象
+                var imgObjPreview = document.getElementById("img"+i); 
+                imgObjPreview.style.display = 'block';
+                    imgObjPreview.style.width = '100px';
+                    imgObjPreview.style.height = '100px';
+                    // imgObjPreview.src =window.webkitURL.createObjectURL(docObj.files[i]);
+                    // var objUrl=getObjectURL(docObj.files[i]);
+
+
+                  
+
+        　　　　　　// 2 调用该对象的方法 读取文件 文件
+        　　　　　　// 读取文件是一个耗时操作 不一定什么时候读取完毕
+        // 　　　　　　reader.readAsDataURL(docObj.files[i]);
+        　　　　　　// reader.readAsDataURL(f);
+
+        　　　　　　// 3 添加事件 当文件过大，不能立即读完 通过事件监听进度
+        　　　　　　// 耗时操作 通过事件的方式进行注册 并且回调
+        // 　　　　　　reader.onload = function (){
+        　　　　　　　　// 使用读取完毕的文件
+        // 　　　　　　　　console.log(reader.result);
+        　　　　　　　　//使用返回的结果 即可
+        // 　　　　　　　　document.querySelector('.iconBox').style.background = 'url('+ reader.result+') no-repeat center/cover';
+        // 　　　　　　}
+                }
+                else {
+                    //IE下，使用滤镜
+                    docObj.select();
+                    var imgSrc = document.selection.createRange().text;
+                    //alert(imgSrc)
+                    var localImagId = document.getElementById("img" + i);
+                   //必须设置初始大小
+                    localImagId.style.width = "200px";
+                    localImagId.style.height = "180px";
+                    //图片异常的捕捉，防止用户修改后缀来伪造图片
+                    try {
+                        localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                        localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+                    }
+                    catch (e) {
+                        alert("您上传的图片格式不正确，请重新选择!");
+                        return false;
+                    }
+                    imgObjPreview.style.display = 'none';
+                    document.selection.empty();
+                }
+            }  
+            return true;
+        }
+    
+        
+    </script>
 </html>

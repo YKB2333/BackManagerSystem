@@ -103,6 +103,16 @@ $(function () {
                     "description":startData.description,
                     "adding_time":Date.now()
                 });
+                var viewImg = document.getElementById("viewImg");
+                console.log(startData.img)
+                var imgarr = (startData.img).split(',');
+                console.log(imgarr)
+                var html = '';
+                
+                for(i = 0;i < imgarr.length;i++){
+                    html += '<li class="fl" style="margin-left:74px"><img src="'+imgarr[i]+'" alt=""  style="width:100px"><input type="radio" name="sex" value="设为封面" title="设为封面" checked=""  style="display: inline-block">设为封面</li>'
+                }
+                viewImg.innerHTML = html;
                 // form.on('submit(button)', function(data){
                 //     // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
                 //     // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
@@ -186,29 +196,44 @@ $(function () {
                         arr2.push(imgsrc);
                     }
 
-                    var data = data1+"&goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description;
-                    console.log(data);
-                    //发起ajax请求
-                    let xhr = new XMLHttpRequest();
-                      
-                    xhr.open('post','/editGoods/update',true);
-                    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-        
-                    // let data2 = JSON.stringify(data);
-                    // console.log(data);
-                    xhr.send(data);
-                    xhr.onload = () =>{
-                        if(xhr.status == 200){
-                            let res = JSON.parse(xhr.responseText);
-                            if(res.data.ok == 1){
-                                // location.href = 'login.html';
-                                
-                                alert('商品修改成功');
-                                location.href = '../html/goodslist.html';
-             
+                    console.log(_goods_name);
+                    console.log(_now_price)
+                    console.log(_stock)
+
+
+                    if( _goods_name && _now_price && _stock){
+                        
+                        if(category == ''){
+                            alert('请选择商品分类！')
+                        }else {
+                            var data = data1+"&goods_name="+_goods_name+"&sub_heading="+_sub_heading+"&old_price="+_old_price+"&now_price="+_now_price+"&category="+category+"&img="+arr2+"&stock="+_stock+"&attributes="+arr1+"&state="+state+"&description="+_description;
+                            console.log(data);
+                            //发起ajax请求
+                            let xhr = new XMLHttpRequest();
+                              
+                            xhr.open('post','/editGoods/update',true);
+                            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                
+                            // let data2 = JSON.stringify(data);
+                            // console.log(data);
+                            xhr.send(data);
+                            xhr.onload = () =>{
+                                if(xhr.status == 200){
+                                    let res = JSON.parse(xhr.responseText);
+                                    if(res.data.ok == 1){
+                                        // location.href = 'login.html';
+                                        
+                                        alert('商品修改成功');
+                                        location.href = '../html/goodslist.html';
+                     
+                                    }
+                                }
                             }
                         }
+                    }else {
+                        alert('请继续完善表单！')
                     }
+                    
                     
                 }
             }
