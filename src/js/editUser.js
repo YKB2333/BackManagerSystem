@@ -209,7 +209,9 @@ $(function () {
                     // console.log(res);
                     if(res.code == 200){
                         alert(res.msg);
-                        location.href = '../html/user_list.html';
+                        if(user.superUser || user2.superUser){
+                            location.href = '../html/user_list.html';
+                        }
                     }
                 }
             });
