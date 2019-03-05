@@ -50,7 +50,7 @@ $(()=>{
                                 localStorage.setItem('user',JSON.stringify(str));
                                 location.href = 'html/center.html';
                             }else{
-                                sessionStorage.setItem('username',str.username);
+                                sessionStorage.setItem('user',JSON.stringify(str));
                                 location.href = 'html/center.html';
                             }
                         }else{

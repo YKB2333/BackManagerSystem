@@ -25,7 +25,7 @@
             <a href="../html/goodslist.html">商品列表</a>
           </em>
           <em>
-            <a href="../html/category.html">商品分类</a>
+            <a href="../html/goods_category.html">商品分类</a>
           </em>
           <em>
             <a href="../html/addGoods.html">添加商品</a>
@@ -36,11 +36,10 @@
         <dt>用户管理</dt>
         <dd>
           <em>
-            <a href="../html/user_list.html">用户列表</a>
+            <a href="../html/user_edit.html">个人信息</a>
           </em>
-          <em>
-            <a href="../html/user_add.html">添加用户</a>
-          </em>
+          <em><a id="user-list" href="javascript:;">用户列表</a></em>
+          <em><a id="user-add" href="../html/user_add.html">添加用户</a></em>
         </dd>
       </dl>
       <dl>
@@ -91,11 +90,12 @@
         
         
         //未设置免登录
-        let user2 = sessionStorage.getItem('username');
+        let user2 = sessionStorage.getItem('user');
         if(!user2){
-            user2 = '';
+            user2 = {};
         }else{
-            $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+            user2 = JSON.parse(user2);
+            $('#login').html('欢迎您  '+user2.username+'<a href="javascript:;">退出</a>');
             $('#login').css('color','purple');
         }
 
@@ -105,6 +105,8 @@
             sessionStorage.clear();
             location.href = '../index.html';
         });
+
+        
     })()
   </script>
   <script type="text/html" id="barDemo">

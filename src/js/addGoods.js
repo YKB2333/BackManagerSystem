@@ -12,11 +12,12 @@ window.onload = function (){
     
     
     //未设置免登录
-    let user2 = sessionStorage.getItem('username');
+    let user2 = sessionStorage.getItem('user');
     if(!user2){
-        user2 = '';
+        user2 = {};
     }else{
-        $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+        user2 = JSON.parse(user2);
+        $('#login').html('欢迎您  '+user2.username+'<a href="javascript:;">退出</a>');
         $('#login').css('color','purple');
     }
 
@@ -26,6 +27,22 @@ window.onload = function (){
         sessionStorage.clear();
         location.href = '../index.html';
     });
+    //不同权限用户点击用户列表、添加用户操作
+    if(user.superUser || user2.superUser){
+        $('#user-list').on('click',function(){
+          location.href = '../html/user_list.html';
+        });
+        $('#user-add').on('click',function(){
+          location.href = '../html/user_add.html';
+        });
+      }else{
+          $('#user-list').on('click',function(){
+              alert('您没有权限哦');
+          });
+          $('#user-add').on('click',function(){
+              alert('您没有权限哦');
+          });
+      }
     //一般直接写在一个js文件中
     layui.use(['layer', 'form'], function(){
         var layer = layui.layer

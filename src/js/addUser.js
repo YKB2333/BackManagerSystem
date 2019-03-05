@@ -12,11 +12,12 @@ $(function () {
     
     
     //未设置免登录
-    let user2 = sessionStorage.getItem('username');
+    let user2 = sessionStorage.getItem('user');
     if(!user2){
-        user2 = '';
+        user2 = {};
     }else{
-        $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+        user2 = JSON.parse(user2);
+        $('#login').html('欢迎您  '+user2.username+'<a href="javascript:;">退出</a>');
         $('#login').css('color','purple');
     }
 

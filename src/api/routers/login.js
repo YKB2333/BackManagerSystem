@@ -14,13 +14,25 @@ router.post('/',async (ctx,next)=>{
 
     if(res){
         let _token = token.create(username);
-        ctx.body = {
-            _id:res._id,
-            username:res.username,
-            gender:res.gender,
-            regtime:res.regtime,
-            token:_token,
-            code:200
+        if(res.superUser){
+            ctx.body = {
+                _id:res._id,
+                username:res.username,
+                gender:res.gender,
+                regtime:res.regtime,
+                superUser:res.superUser,
+                token:_token,
+                code:200
+            }
+        }else{
+            ctx.body = {
+                _id:res._id,
+                username:res.username,
+                gender:res.gender,
+                regtime:res.regtime,
+                token:_token,
+                code:200
+            }
         }
     }else{
         ctx.body = {
