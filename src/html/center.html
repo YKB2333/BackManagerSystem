@@ -33,12 +33,9 @@
             <dl>
                 <dt>用户管理</dt>
                 <dd>
-                    <em>
-                        <a href="../html/user_list.html">用户列表</a>
-                    </em>
-                    <em>
-                        <a href="../html/user_add.html">添加用户</a>
-                    </em>
+                    <em><a href="../html/user_edit.html">个人信息</a></em>
+                    <em><a id="user-list" href="javascript:;">用户列表</a></em>
+                    <em><a id="user-add" href="javascript:;">添加用户</a></em>
                 </dd>
             </dl>
             <dl>
@@ -89,11 +86,12 @@
         
         
         //未设置免登录
-        let user2 = sessionStorage.getItem('username');
+        let user2 = sessionStorage.getItem('user');
         if(!user2){
-            user2 = '';
+            user2 = {};
         }else{
-            $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+            user2 = JSON.parse(user2);
+            $('#login').html('欢迎您  '+user2.username+'<a href="javascript:;">退出</a>');
             $('#login').css('color','purple');
         }
 
@@ -103,6 +101,23 @@
             sessionStorage.clear();
             location.href = '../index.html';
         });
+
+        //不同权限用户点击用户列表、添加用户操作
+        if(user.superUser || user2.superUser){
+          $('#user-list').on('click',function(){
+            location.href = '../html/user_list.html';
+          });
+          $('#user-add').on('click',function(){
+            location.href = '../html/user_add.html';
+          });
+        }else{
+            $('#user-list').on('click',function(){
+                alert('您没有权限哦');
+            });
+            $('#user-add').on('click',function(){
+                alert('您没有权限哦');
+            });
+        }
 
     </script>
 </body>

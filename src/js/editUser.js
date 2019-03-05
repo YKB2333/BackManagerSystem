@@ -12,11 +12,12 @@ $(function () {
     
     
     //未设置免登录
-    let user2 = sessionStorage.getItem('username');
+    let user2 = sessionStorage.getItem('user');
     if(!user2){
-        user2 = '';
+        user2 = {};
     }else{
-        $('#login').html('欢迎您  '+user2+'<a href="javascript:;">退出</a>');
+        user2 = JSON.parse(user2);
+        $('#login').html('欢迎您  '+user2.username+'<a href="javascript:;">退出</a>');
         $('#login').css('color','purple');
     }
 
@@ -27,35 +28,94 @@ $(function () {
         location.href = '../index.html';
     });
 
+    //不同权限用户点击用户列表、添加用户操作
+    if(user.superUser || user2.superUser){
+        $('#user-list').on('click',function(){
+          location.href = '../html/user_list.html';
+        });
+        $('#user-add').on('click',function(){
+          location.href = '../html/user_add.html';
+        });
+      }else{
+          $('#user-list').on('click',function(){
+              alert('您没有权限哦');
+          });
+          $('#user-add').on('click',function(){
+              alert('您没有权限哦');
+          });
+      }
+
     // $('#username').val('feng');
     var isok2 = false;
     var isok3 = false;
     var isok4 = false;
     var isok5 = false;
-    //根据传过来的用户名查询数据库渲染
-    var webdata = decodeURI(location.search);//网址解码,取？号后面部分
-    // console.log(data);
-    var str = webdata.slice(1);//去问号
-    var Username = str.split('=')[1];
-    // console.log(Username);
-    $.ajax({
-        type:'POST',
-        url:'/userlist/renderOne',
-        data:'username='+Username,
-        success:function(res){
-            // console.log(res[0]);
-            $('#username').val(res[0].username);
-            $('#nike').val(res[0].nike);
-            $('#phone').val(res[0].phone);
-            $('#gender').val(res[0].gender);
-            $('#email').val(res[0].email);
-            $('#psd').val(res[0].password);
-            isok2 = true;
-            isok3 = true;
-            isok4 = true;
-            isok5 = true;
-        }
-    })
+    if(location.search){
+        //根据传过来的用户名查询数据库渲染
+        var webdata = decodeURI(location.search);//网址解码,取？号后面部分
+        // console.log(data);
+        var str = webdata.slice(1);//去问号
+        var Username = str.split('=')[1];
+        // console.log(Username);
+        $.ajax({
+            type:'POST',
+            url:'/userlist/renderOne',
+            data:'username='+Username,
+            success:function(res){
+                // console.log(res[0]);
+                $('#username').val(res[0].username);
+                $('#nike').val(res[0].nike);
+                $('#phone').val(res[0].phone);
+                $('#gender').val(res[0].gender);
+                $('#email').val(res[0].email);
+                $('#psd').val(res[0].password);
+                isok2 = true;
+                isok3 = true;
+                isok4 = true;
+                isok5 = true;
+            }
+        });
+    }else if(user.username){
+        console.log(user);
+        console.log(user2);
+        $.ajax({
+            type:'POST',
+            url:'/userlist/renderOne',
+            data:'username='+user.username,
+            success:function(res){
+                // console.log(res[0]);
+                $('#username').val(res[0].username);
+                $('#nike').val(res[0].nike);
+                $('#phone').val(res[0].phone);
+                $('#gender').val(res[0].gender);
+                $('#email').val(res[0].email);
+                $('#psd').val(res[0].password);
+                isok2 = true;
+                isok3 = true;
+                isok4 = true;
+                isok5 = true;
+            }
+        });
+    }else{
+        $.ajax({
+            type:'POST',
+            url:'/userlist/renderOne',
+            data:'username='+user2.username,
+            success:function(res){
+                // console.log(res[0]);
+                $('#username').val(res[0].username);
+                $('#nike').val(res[0].nike);
+                $('#phone').val(res[0].phone);
+                $('#gender').val(res[0].gender);
+                $('#email').val(res[0].email);
+                $('#psd').val(res[0].password);
+                isok2 = true;
+                isok3 = true;
+                isok4 = true;
+                isok5 = true;
+            }
+        });
+    }
 
 
     //密码
