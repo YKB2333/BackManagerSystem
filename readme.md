@@ -46,16 +46,16 @@
 
 ### 项目布局
 .
-├── src                                         			// 源码目录
+├── src                                         	// 源码目录
 │   ├── api                                    	 	// 请求接口
-│   │   └── db                                  		// 数据库操作封装
+│   │   └── db                                  	// 数据库操作封装
 │   │       └── index.js                                                      
-│   │   └── routers                            		 // 数据接口
+│   │   └── routers                            		// 数据接口
 │   │       ├── addGoods.js                     
 │   │       ├── category.js                    
 │   │       ├── editGoods.js                    
 │   │       ├── goodslist.js                    
-│   │       ├── index.js                        		// 路由
+│   │       ├── index.js                        	// 路由
 │   │       ├── login.js                       
 │   │       ├── order.js                        
 │   │       ├── tokenverify.js                 
@@ -64,18 +64,18 @@
 │   │       └── userlist.js                                                  
 │   │   └── utils                              		 
 │   │       └── tokens.js                       
-│   ├── assets                                 		 // 主件
-│   │   ├── bootstrap                        		 // bootstrap框架
+│   ├── assets                                 		// 主件
+│   │   ├── bootstrap                        		// bootstrap框架
 │   │   └── layui                              		// layui框架
-│   ├── css                                     		// css样式
+│   ├── css                                     	// css样式
 │   │   ├── addGoods.css                         
 │   │   ├── base.css                     
 │   │   ├── center.css                        
 │   │   ├── common.css 
 │   │   ├── login.css                   
 │   │   └── user_add.css  
-│   ├── data                                    		// 数据
-│   ├── html                                    		// html文件
+│   ├── data                                    	// 数据
+│   ├── html                                    	// html文件
 │   │   ├── add_category.html                          
 │   │   ├── addGoods.html                           
 │   │   ├── center.html                          
@@ -87,8 +87,8 @@
 │   │   ├── user_add.html                          
 │   │   ├── uesr_edit.html                                  
 │   │   └── user_list.html                     
-│   ├── img                                     		// 图片
-│   ├── js                                           	 	// js文件                        
+│   ├── img                                     	// 图片
+│   ├── js                                          // js文件                        
 │   │   ├── addGoods.js                           
 │   │   ├── addUser.js 
 │   │   ├── common.js                           
@@ -96,11 +96,11 @@
 │   │   ├── editUser.js                          
 │   │   ├── editUser.js                                                               
 │   │   └── login.js 
-│   ├── lib                                            		 // 插件类库 
+│   ├── lib                                         // 插件类库 
 │   │   ├── jquery-1.10.1.min.js                          
 │   │   ├── jquery.cookie.js                                                               
 │   │   └── mycool.js                                    
-│   ├── index.html                             		 // 入口html文件
-│   ├── server.js                                		 // 服务器
-├── readme                                       		// 说明文件
+│   ├── index.html                             		// 入口html文件
+│   ├── server.js                                	// 服务器
+├── readme                                       	// 说明文件
 .
