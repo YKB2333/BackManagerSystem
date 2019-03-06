@@ -59,10 +59,10 @@ let ObjectId = require('mongodb').ObjectId;
 //多个删除
 router.post('/deleteMany',async (ctx,next)=>{
     let {_id_arr} = ctx.request.body;
-    console.log({_id_arr});
+
     for(i = 0;i < _id_arr.length;i++){
         _id = {_id: ObjectId(_id_arr[i])};
-        console.log(_id)
+
         await db.delete('goodslist',_id);
     }
     
@@ -86,8 +86,7 @@ router.post('/deleteSingle',async (ctx,next)=>{
     let res =   await db.delete('goodslist',_id);
     // }
     
-    console.log(res)
-    
+
         ctx.body = {
             
             code:0,
@@ -101,8 +100,7 @@ router.post('/deleteSingle',async (ctx,next)=>{
 router.post('/state',async (ctx,next)=>{
     let {_id,state} = ctx.request.body;
     // let {state} = ctx.request.body;
-    // console.log(ctx.request.body);
-    console.log({_id,state})
+
     // _id = {_id: ObjectId(_id)};
     // {"_id":ObjectId(_id),"state":state};
     if(state == '下架'){
@@ -111,9 +109,9 @@ router.post('/state',async (ctx,next)=>{
         state = '下架'
     }
     
-    console.log({_id:ObjectId(_id),state:state})
+
     let res = await db.update('goodslist',{_id:ObjectId(_id)},{'state':state});
-    console.log(res)
+
     if(res.result.ok == 1){
         ctx.body = {
             

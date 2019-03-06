@@ -39,7 +39,7 @@ router.get('/renderAll',async (ctx,next)=>{
 router.post('/renderOne',async (ctx,next)=>{
     // let {username} = ctx.request.body;
     let res = await db.find('user',ctx.request.body);
-    console.log(ctx.request.body);
+
     ctx.body = res;
 });
 

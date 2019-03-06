@@ -7,7 +7,7 @@ router.post('/',async (ctx,next)=>{
     // ctx.body = 'denglu';
     // let {username,password} = ctx.request.body;
 
-    console.log(ctx.request.body);
+
     let res = await db.insert('user',ctx.request.body);
     
     if(res){
@@ -21,12 +21,12 @@ router.post('/',async (ctx,next)=>{
             msg:'fail'
         }
     }
-    console.log(ctx.body);
+
 });
 
 router.post('/has',async (ctx,next)=>{
     let res = await db.find('user',ctx.request.body);
-    console.log(res);
+
     if(res.length>0){
         ctx.body = {
             code:200,

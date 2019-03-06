@@ -94,10 +94,10 @@ router.post('/addCategory',async (ctx,next)=>{
 //删除分类
 router.post('/deleteMany',async (ctx,next)=>{
     let {_id_arr} = ctx.request.body;
-    console.log({_id_arr});
+    // console.log({_id_arr});
     for(i = 0;i < _id_arr.length;i++){
         _id = {_id: ObjectId(_id_arr[i])};
-        console.log(_id)
+        // console.log(_id)
         await db.delete('category',_id);
     }
     
@@ -117,11 +117,11 @@ router.post('/deleteSingle',async (ctx,next)=>{
     // console.log({_id_arr});
     // for(i = 0;i < _id_arr.length;i++){
         _id = {_id: ObjectId(_id)};
-        console.log(_id)
+        // console.log(_id)
     let res =   await db.delete('category',_id);
     // }
     
-    console.log(res)
+    // console.log(res)
     
         ctx.body = {
             
@@ -169,7 +169,7 @@ router.post('/update',async (ctx,next)=>{
     // let {_id} = ctx.request.body;
 
     _id = {_id: ObjectId(_id)};
-    console.log(_id,22);
+    // console.log(_id,22);
     
     // delete ctx.request.body._id;
     

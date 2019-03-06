@@ -37,17 +37,17 @@ router.post('/',async (ctx,next)=>{
 });
 
 router.post('/update',async (ctx,next)=>{
-    console.log(ctx.request.body,22);
+    // console.log(ctx.request.body,22);
     // ctx.body = 'denglu';
     // let {_id} = ctx.request.body;
     // console.log(_id,11);
     let {_id,goods_name,sub_heading,old_price,now_price,category,img,stock,attributes,state,description} = ctx.request.body;
     // let {_id} = ctx.request.body;
-    console.log({goods_name,sub_heading,old_price,now_price,category,img,stock,attributes,state,description},33);
+    // console.log({goods_name,sub_heading,old_price,now_price,category,img,stock,attributes,state,description},33);
     
     // console.log({goods_name,sub_heading,old_price,now_price,category,img,stock,attributes,state,description,adding_time})
     _id = {_id: ObjectId(_id)};
-    console.log(_id,22);
+    // console.log(_id,22);
     
     // delete ctx.request.body._id;
     
