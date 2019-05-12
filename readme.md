@@ -2,10 +2,6 @@
 ## 项目名称
 * BackstageManagerSystem
 
-## 人员结构
-* 组长：刘杰
-* 组员：康庆峰、刘杰
-
 ### 技术栈
 * nodejs + Koa + mongoDB + jQuery + ES6 + layui + bootstrap
 
